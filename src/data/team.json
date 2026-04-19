@@ -1,0 +1,20 @@
+[
+  { "name": "Tom Dao",              "title": "Sound Designer",     "photo": "tom.png",                                    "attributes": ["Coffee Drinker", "Dog Owner", "Flag Football Runner-Up", "Rare Quarter Collector", "Sound Guru"] },
+  { "name": "Jonathan Miller",      "title": "Sound Designer",     "photo": "jonathan.jpg",                               "attributes": ["Matrix Extra", "Roller Skater", "Wants a Dog", "Mother's Favorite Son", "Sound Magician"] },
+  { "name": "Reilly Jones",         "title": "Technical Director", "photo": "reilly.png",                                 "attributes": ["Canasta Player", "BBQ Champion", "Green Tea Drinker", "Trucker Hat Enthusiast", "Fixer of All"] },
+  { "name": "Hanna Choi",           "title": "Sound Designer",     "photo": "Hanna-choi.png",                             "attributes": ["Subway Exit Tactician", "Pizza Egalitarian", "Handicrafter", "Sucker for Nice Socks"] },
+  { "name": "Cory Foley-Marsello",  "title": "Composer",           "photo": "cory-1.jpg",                                 "attributes": ["Master Puppeteer", "Kills All Plants", "Vending Machine Phobia", "Saw Lindsay Lohan Once", "Lyrical Genius"] },
+  { "name": "John Rigatuso",        "title": "Sound Designer",     "photo": "John.jpg",                                   "attributes": ["Fear of Frogs", "Bookmark Collector", "Hates Jello", "Wants Office Cat", "Sound Wizard"] },
+  { "name": "William Lowe",         "title": "Audio Engineer",     "photo": "William2.jpg",                               "attributes": ["Baseball Enthusiast", "Mule Expert", "Tartan Lover", "Amtrak Aficionado", "Sound Hoarder"] },
+  { "name": "Roc Lee",              "title": "Audio Director",     "photo": "Roc.jpg",                                    "attributes": ["Kites Recreationally", "Wham Superfan", "Can't Roller Skate", "Likes Fruit Roll Ups", "Musical Prodigy"] },
+  { "name": "David Murphy",         "title": "Sound Designer",     "photo": "david-murphy.png",                           "attributes": ["Favorite Show: Inked", "Uses Echo Location", "Tier 1 Call of Duty Operator"] },
+  { "name": "Chuck Carr",           "title": "Audio Engineer",     "photo": "chuck-2.png",                                "attributes": ["Former N*SYNC Backup Dancer", "Plays a Mean Harmonica", "Bob Ross Fanboy", "Audio Organizer"] },
+  { "name": "Steve Dobias",         "title": "Sound Designer",     "photo": "headshot_steve-dobias-e1709567293360.jpg",   "attributes": ["Usually Sporting a Hoodie", "Pushover for Fried Chicken", "Hoards Classic Guitars", "It's 4 o'clock Somewhere"] },
+  { "name": "Dean Kontos",          "title": "TODO",               "photo": "dean-e1709575555880.png",                    "attributes": ["TODO", "TODO", "TODO"] },
+  { "name": "David Jalbert",        "title": "TODO",               "photo": "David-jalbert.png",                          "attributes": ["TODO", "TODO", "TODO"] },
+  { "name": "Marcus",               "title": "TODO",               "photo": "Marcus-1.jpg",                               "attributes": ["TODO", "TODO", "TODO"] },
+  { "name": "Austin",               "title": "TODO",               "photo": "austin-1.jpg",                               "attributes": ["TODO", "TODO", "TODO"] },
+  { "name": "Chris",                "title": "TODO",               "photo": "chris.png",                                  "attributes": ["TODO", "TODO", "TODO"] },
+  { "name": "Scott",                "title": "TODO",               "photo": "scott.png",                                  "attributes": ["TODO", "TODO", "TODO"] },
+  { "name": "Rich",                 "title": "TODO",               "photo": "rich-1.jpg",                                 "attributes": ["TODO", "TODO", "TODO"] }
+]

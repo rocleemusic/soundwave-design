@@ -1,0 +1,13 @@
+[
+  { "name": "Bethesda",            "file": "bethesda.svg",             "forceWhite": true  },
+  { "name": "2K Games",            "file": "2k-games.svg",             "forceWhite": false },
+  { "name": "Microsoft",           "file": "microsoft.svg",            "forceWhite": false },
+  { "name": "Sony",                "file": "sony.svg",                 "forceWhite": true  },
+  { "name": "Marvel",              "file": "marvel.svg",               "forceWhite": false },
+  { "name": "Meta",                "file": "meta.svg",                 "forceWhite": false },
+  { "name": "Activision",          "file": "activision.svg",           "forceWhite": true  },
+  { "name": "Obsidian Entertainment","file": "obsidian-entertainment.svg","forceWhite": false },
+  { "name": "Wizards of the Coast","file": "wizards-of-the-coast.svg", "forceWhite": false },
+  { "name": "Xbox",                "file": "xbox.svg",                 "forceWhite": true  },
+  { "name": "PlayStation",         "file": "playstation.svg",          "forceWhite": true  }
+]

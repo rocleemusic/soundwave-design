@@ -1,0 +1,47 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Audio Partners. Not Vendors. Game audio studio specializing in sound design, technical audio, and original music.',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — Soundwave Designs</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={`${title} — Soundwave Designs`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={`${base}/images/portfolio/OW2-Key-art-1280x720-c-default.png`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href={`${base}/images/logo.svg`} type="image/svg+xml" />
+</head>
+<body>
+  <Nav />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

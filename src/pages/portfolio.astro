@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import portfolio from '../data/portfolio.json';
+
+const base = import.meta.env.BASE_URL;
+const sorted = [...portfolio].sort((a, b) => b.year - a.year);
+const serviceFilters = ['All','sound-design','technical-audio','trailer-cinematic','original-music','vo-pipeline'];
+const platformFilters = ['All','PC','Console','Mobile','VR'];
+---
+<Base title="Portfolio" description="Game audio projects across sound design, technical audio, original music, and more.">
+
+  <header class="page-header">
+    <div class="container">
+      <div class="page-eyebrow">Our Work</div>
+      <h1 class="page-title">Portfolio</h1>
+    </div>
+  </header>
+
+  <section class="portfolio-section">
+    <div class="container">
+
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">Service</span>
+          {serviceFilters.map(f => (
+            <button class={`filter-btn${f === 'All' ? ' active' : ''}`} data-service={f}>{f === 'All' ? 'All' : f.replace(/-/g,' ')}</button>
+          ))}
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Platform</span>
+          {platformFilters.map(f => (
+            <button class={`filter-btn${f === 'All' ? ' active' : ''}`} data-platform={f}>{f}</button>
+          ))}
+        </div>
+      </div>
+
+      <div class="portfolio-grid">
+        {sorted.map(p => (
+          <a
+            class="project-card"
+            href={`${base}/portfolio/${p.slug}/`}
+            data-services={p.services.join(',')}
+            data-platforms={p.platforms.join(',')}
+          >
+            <img src={`${base}/images/portfolio/${p.cover}`} alt={p.title} width="1280" height="720" />
+            <div class="project-info">
+              <div class="project-title">{p.title}</div>
+              <div class="project-meta">{p.client} · {p.year}</div>
+              <div class="project-tags">
+                {p.services.map(s => <span class="project-tag">{s.replace(/-/g,' ')}</span>)}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .page-header { padding: 80px 0 64px; border-bottom: 1px solid #2a2318; }
+  .page-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .page-title { font-size: clamp(32px, 4vw, 52px); font-weight: 700; letter-spacing: -0.02em; }
+
+  .portfolio-section { padding: 64px 0; }
+
+  .filters { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+  .filter-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .filter-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); min-width: 60px; }
+  .filter-btn {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: 1px solid #2a2318;
+    padding: 5px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .filter-btn:hover { color: var(--text); border-color: var(--text-muted); }
+  .filter-btn.active { color: var(--accent); border-color: var(--accent); }
+
+  .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .project-card {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    display: block;
+    background: var(--surface);
+    text-decoration: none;
+  }
+  .project-card.hidden { display: none; }
+  .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s, filter 0.4s; filter: brightness(0.8); }
+  .project-card:hover img { transform: scale(1.04); filter: brightness(1); }
+  .project-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(12,11,8,0.92));
+    transform: translateY(6px);
+    transition: transform 0.3s;
+  }
+  .project-card:hover .project-info { transform: translateY(0); }
+  .project-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .project-meta { font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 6px; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .project-tag {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent-deep);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<script>
+  const serviceButtons = document.querySelectorAll<HTMLButtonElement>('[data-service]');
+  const platformButtons = document.querySelectorAll<HTMLButtonElement>('[data-platform]');
+  const cards = document.querySelectorAll<HTMLElement>('.project-card');
+
+  let activeService = 'All';
+  let activePlatform = 'All';
+
+  function applyFilters() {
+    cards.forEach(card => {
+      const services = card.dataset.services?.split(',') ?? [];
+      const platforms = card.dataset.platforms?.split(',') ?? [];
+      const matchService = activeService === 'All' || services.includes(activeService);
+      const matchPlatform = activePlatform === 'All' || platforms.includes(activePlatform);
+      card.classList.toggle('hidden', !(matchService && matchPlatform));
+    });
+  }
+
+  serviceButtons.forEach(btn => btn.addEventListener('click', () => {
+    serviceButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeService = btn.dataset.service ?? 'All';
+    applyFilters();
+  }));
+
+  platformButtons.forEach(btn => btn.addEventListener('click', () => {
+    platformButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activePlatform = btn.dataset.platform ?? 'All';
+    applyFilters();
+  }));
+</script>

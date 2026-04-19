@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Blog" description="Studio notes, project breakdowns, and tutorials from Soundwave Designs.">
+
+  <header class="page-header">
+    <div class="container">
+      <div class="page-eyebrow">Ideas & Updates</div>
+      <h1 class="page-title">Studio Notes</h1>
+    </div>
+  </header>
+
+  <section class="blog-empty">
+    <div class="container">
+      <p class="blog-empty-text">Posts coming soon.</p>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .page-header { padding: 80px 0 64px; border-bottom: 1px solid #2a2318; }
+  .page-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .page-title { font-size: clamp(32px, 4vw, 52px); font-weight: 700; letter-spacing: -0.02em; }
+  .blog-empty { padding: 120px 0; text-align: center; }
+  .blog-empty-text { font-size: 16px; color: var(--text-muted); }
+</style>

@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+import jobs from '../data/jobs.json';
+import benefits from '../data/benefits.json';
+import faq from '../data/faq.json';
+import studio from '../data/studio.json';
+
+const base = import.meta.env.BASE_URL;
+---
+<Base title="Jobs" description="Join the Soundwave Designs team. Open roles in game audio, sound design, and technical audio.">
+
+  <header class="page-header">
+    <div class="container">
+      <div class="page-eyebrow">Work With Us</div>
+      <h1 class="page-title">Join the Team</h1>
+    </div>
+  </header>
+
+  <!-- OPEN ROLES -->
+  <section class="jobs-section">
+    <div class="container">
+      <div class="section-label">Open Roles</div>
+      <h2 class="section-title" style="margin-bottom:40px;">Current Openings</h2>
+      {jobs.length === 0
+        ? <p class="no-jobs">No open roles at this time. Check back soon.</p>
+        : jobs.map(job => (
+          <div class="job-card fade-up">
+            <div class="job-header">
+              <div>
+                <h3 class="job-title">{job.title}</h3>
+                <div class="job-meta">{job.type} · {job.location}</div>
+              </div>
+              <a class="btn-primary" href={`mailto:${studio.email}?subject=Application: ${job.title}`}>Apply</a>
+            </div>
+            <p class="job-desc">{job.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits-section">
+    <div class="container">
+      <div class="section-label">Why Join</div>
+      <h2 class="section-title" style="margin-bottom:40px;">Benefits</h2>
+      <div class="benefits-grid">
+        {benefits.map(b => (
+          <div class="benefit-card fade-up">
+            <h3 class="benefit-title">{b.title}</h3>
+            <p class="benefit-desc">{b.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-label">Questions</div>
+      <h2 class="section-title" style="margin-bottom:40px;">FAQ</h2>
+      <div class="faq-list">
+        {faq.map(item => (
+          <details class="faq-item">
+            <summary class="faq-question">{item.question}</summary>
+            <p class="faq-answer">{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="container">
+      <h2>Don't see the right role?</h2>
+      <p>Send us a note anyway — we're always interested in exceptional people.</p>
+      <a class="btn-primary" href={`mailto:${studio.email}?subject=General Inquiry`}>Get in Touch</a>
+    </div>
+  </div>
+
+</Base>
+
+<style>
+  .page-header { padding: 80px 0 64px; border-bottom: 1px solid #2a2318; }
+  .page-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .page-title { font-size: clamp(32px, 4vw, 52px); font-weight: 700; letter-spacing: -0.02em; }
+
+  .jobs-section { padding: 80px 0; border-bottom: 1px solid #2a2318; }
+  .no-jobs { color: var(--text-muted); font-size: 16px; }
+  .job-card { background: var(--surface); padding: 40px; margin-bottom: 2px; }
+  .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .job-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .job-meta { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .job-desc { font-size: 15px; line-height: 1.7; color: var(--text-muted); }
+
+  .benefits-section { padding: 80px 0; border-bottom: 1px solid #2a2318; }
+  .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .benefit-card { background: var(--surface); padding: 40px; }
+  .benefit-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .benefit-desc { font-size: 15px; line-height: 1.7; color: var(--text-muted); }
+
+  .faq-section { padding: 80px 0; border-bottom: 1px solid #2a2318; }
+  .faq-list { display: flex; flex-direction: column; gap: 2px; }
+  .faq-item { background: var(--surface); }
+  .faq-question {
+    padding: 24px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.15s;
+  }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::after { content: '+'; color: var(--accent); font-size: 20px; }
+  details[open] .faq-question::after { content: '−'; }
+  .faq-question:hover { color: var(--accent); }
+  .faq-answer { padding: 0 32px 24px; font-size: 15px; line-height: 1.75; color: var(--text-muted); }
+
+  @media (max-width: 768px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+    .job-header { flex-direction: column; gap: 16px; }
+  }
+</style>

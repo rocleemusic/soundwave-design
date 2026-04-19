@@ -1,0 +1,75 @@
+---
+const base = import.meta.env.BASE_URL;
+const links = [
+  { label: 'About',     href: `${base}/about/`     },
+  { label: 'Services',  href: `${base}/services/`  },
+  { label: 'Portfolio', href: `${base}/portfolio/` },
+  { label: 'Jobs',      href: `${base}/jobs/`      },
+  { label: 'Contact',   href: `${base}/contact/`   },
+];
+---
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href={base || '/'}>
+      <img src={`${base}/images/logo.svg`} alt="Soundwave Designs" width="48" height="48" />
+      <span>SOUNDWAVE DESIGNS</span>
+    </a>
+    <div class="nav-links">
+      {links.map(l => <a href={l.href}>{l.label}</a>)}
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: transparent;
+    transition: background 0.3s, border-color 0.3s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
+    background: rgba(12,11,8,0.95);
+    backdrop-filter: blur(12px);
+    border-color: #2a2318;
+  }
+  .nav-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 22px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .nav-logo img { height: 48px; width: auto; display: block; }
+  .nav-logo span { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  @media (max-width: 768px) {
+    .nav-inner { padding: 18px 24px; }
+    .nav-links { display: none; }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('scrolled', window.scrollY > 40);
+  });
+</script>

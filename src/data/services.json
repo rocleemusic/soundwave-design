@@ -1,0 +1,47 @@
+[
+  {
+    "id": "01",
+    "slug": "sound-design",
+    "eyebrow": "Games · Interactive",
+    "title": "Sound Design",
+    "descriptor": "Hand-built custom assets for every moment in your game.",
+    "body": "Designing sound is an art and a craft. Every hand-built asset is finely tuned to make an impact — weapons, abilities, ambiences, UI, foley, and everything in between.",
+    "chips": ["Custom SFX", "Haptics", "Spatial Audio", "Dialogue Editing", "Foley", "UI Audio"]
+  },
+  {
+    "id": "02",
+    "slug": "technical-audio",
+    "eyebrow": "Games · Interactive",
+    "title": "Technical Audio",
+    "descriptor": "Embedded in your pipeline from pre-production through ship.",
+    "body": "Sound is only half the equation. We embed directly into your pipeline — programming, implementation, and system design from pre-production through ship.",
+    "chips": ["Wwise", "FMOD", "Unreal · C++", "Unity · C#", "Audio System Design", "Engine Integration"]
+  },
+  {
+    "id": "03",
+    "slug": "trailer-cinematic",
+    "eyebrow": "Trailers · Cinematics",
+    "title": "Trailer / Cinematic",
+    "descriptor": "30+ years of award-winning audio for linear and cinematic projects.",
+    "body": "A 30+ year legacy of award-winning sound design and audio mixing for high-profile linear projects. Every screen size. Every platform.",
+    "chips": ["Trailer Sound Design", "Cinematic Mixing", "Audio Post", "Broadcast Delivery"]
+  },
+  {
+    "id": "04",
+    "slug": "original-music",
+    "eyebrow": "Games · Trailers",
+    "title": "Original Music",
+    "descriptor": "Scores that drive the journey and stay with players.",
+    "body": "Our composers are fluent in the language of games — orchestrating scores that drive the journey and stay with players long after the credits roll.",
+    "chips": ["Original Composition", "Orchestral Recording", "Adaptive Music Systems", "Mixing & Mastering", "Songwriting"]
+  },
+  {
+    "id": "05",
+    "slug": "vo-pipeline",
+    "eyebrow": "Games · Interactive",
+    "title": "VO Pipeline",
+    "descriptor": "Dialogue at scale — accurate, clean, on schedule.",
+    "body": "Dialogue at scale, delivered clean. We build streamlined workflows for editing and mastering large volumes of VO — accurate, on schedule, every time.",
+    "chips": ["VO Editing", "Dialogue Mastering", "Pipeline Design", "Large-Volume Delivery"]
+  }
+]

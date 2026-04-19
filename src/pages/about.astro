@@ -1,0 +1,193 @@
+---
+import Base from '../layouts/Base.astro';
+import about from '../data/about.json';
+import team from '../data/team.json';
+import awards from '../data/awards.json';
+
+const base = import.meta.env.BASE_URL;
+---
+<Base title="About" description="Born from a Grammy Award-winning recording studio. Meet the team behind Soundwave Designs.">
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="page-eyebrow">Our Story</div>
+      <h1 class="about-hero-title">About Us</h1>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        {about.stats.map(s => (
+          <div class="stat-item fade-up">
+            <div class="stat-value">{s.value}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN STORY -->
+  <section class="origin-section">
+    <div class="container">
+      <div class="origin-layout">
+        <div class="origin-left">
+          <h2 class="origin-heading">{about.originHeading}</h2>
+        </div>
+        <div class="origin-right">
+          {about.origin.map(para => <p class="origin-para">{para}</p>)}
+          <a class="origin-cta" href={`${base}/portfolio/`}>See Our Work →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-label">The People</div>
+      <h2 class="section-title" style="margin-bottom:12px;">Cast of Characters</h2>
+      <p class="team-intro">Here is the group of amazing talented individuals that come together every day to make beautiful noise.</p>
+      <div class="team-grid">
+        {team.map(member => (
+          <div class="team-card fade-up">
+            <div class="team-photo">
+              <img src={`${base}/images/team/${member.photo}`} alt={member.name} width="400" height="400" />
+            </div>
+            <div class="team-info">
+              <div class="team-name">{member.name}</div>
+              <div class="team-title">{member.title}</div>
+              <ul class="team-attrs">
+                {member.attributes.map(a => <li>{a}</li>)}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITY -->
+  <section class="facility-section">
+    <div class="container">
+      <div class="section-label">Where We Work</div>
+      <h2 class="section-title" style="margin-bottom:48px;">Our Home</h2>
+      <div class="facility-grid">
+        <div class="facility-slot">
+          <span>[FACILITY PHOTO]</span>
+        </div>
+        <div class="facility-slot">
+          <span>[FACILITY PHOTO]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="awards-section">
+    <div class="container">
+      <div class="section-label">Recognition</div>
+      <h2 class="section-title" style="margin-bottom:40px;">Awards</h2>
+      <div class="awards-strip">
+        {awards.map(a => (
+          <div class="award-item">
+            <div class="award-name">{a.name}</div>
+            <div class="award-meta">{a.category} · {a.year}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>Ready to build something?</h2>
+      <p>Tell us about your project and we'll find the right fit.</p>
+      <a class="btn-primary" href={`${base}/contact/`}>Get in Touch</a>
+    </div>
+  </div>
+
+</Base>
+
+<style>
+  .about-hero {
+    padding: 100px 0 72px;
+    border-bottom: 1px solid #2a2318;
+  }
+  .page-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .about-hero-title { font-size: clamp(48px, 8vw, 96px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+
+  /* STATS */
+  .stats-section { padding: 64px 0; border-bottom: 1px solid #2a2318; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .stat-item { padding: 48px; text-align: center; background: var(--surface); }
+  .stat-value { font-size: clamp(40px, 6vw, 72px); font-weight: 700; letter-spacing: -0.03em; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* ORIGIN */
+  .origin-section { padding: 96px 0; border-bottom: 1px solid #2a2318; }
+  .origin-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .origin-heading { font-size: clamp(32px, 4vw, 52px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+  .origin-para { font-size: 16px; line-height: 1.75; color: var(--text-muted); margin-bottom: 20px; }
+  .origin-cta {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 8px;
+  }
+
+  /* TEAM */
+  .team-section { padding: 96px 0; border-bottom: 1px solid #2a2318; }
+  .team-intro { font-size: 16px; color: var(--text-muted); margin-top: 8px; margin-bottom: 56px; max-width: 600px; }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .team-card { background: var(--surface); overflow: hidden; }
+  .team-photo { aspect-ratio: 1; overflow: hidden; }
+  .team-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: grayscale(20%); transition: filter 0.3s; }
+  .team-card:hover .team-photo img { filter: grayscale(0); }
+  .team-info { padding: 20px; }
+  .team-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .team-title { font-size: 11px; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; }
+  .team-attrs { list-style: none; }
+  .team-attrs li { font-size: 11px; color: var(--text-muted); padding: 2px 0; }
+  .team-attrs li::before { content: "·  "; color: var(--accent-deep); }
+
+  /* FACILITY */
+  .facility-section { padding: 96px 0; border-bottom: 1px solid #2a2318; }
+  .facility-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .facility-slot {
+    aspect-ratio: 16/9;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .facility-slot span { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-deep); }
+
+  /* AWARDS */
+  .awards-section { padding: 96px 0; border-bottom: 1px solid #2a2318; }
+  .awards-strip { display: flex; flex-direction: column; gap: 2px; }
+  .award-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    background: var(--surface);
+  }
+  .award-name { font-size: 16px; font-weight: 600; }
+  .award-meta { font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
+
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .origin-layout { grid-template-columns: 1fr; gap: 40px; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .facility-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+import Base from '../../layouts/Base.astro';
+import portfolio from '../../data/portfolio.json';
+
+export function getStaticPaths() {
+  return portfolio.map(p => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<Base title={project.title} description={`${project.title} — ${project.client} · ${project.year}`}>
+
+  <section class="project-hero">
+    <img src={`${base}/images/portfolio/${project.cover}`} alt={project.title} width="1280" height="720" />
+    <div class="project-hero-overlay">
+      <div class="container">
+        <h1 class="project-hero-title">{project.title}</h1>
+        <div class="project-hero-meta">{project.client} · {project.year}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-content">
+    <div class="container">
+      <div class="project-layout">
+
+        <div class="project-body">
+          <h2>About the Project</h2>
+          <p>Project details coming soon.</p>
+        </div>
+
+        <aside class="project-sidebar">
+          <div class="sidebar-block">
+            <div class="sidebar-label">Client</div>
+            <div class="sidebar-value">{project.client}</div>
+          </div>
+          <div class="sidebar-block">
+            <div class="sidebar-label">Year</div>
+            <div class="sidebar-value">{project.year}</div>
+          </div>
+          <div class="sidebar-block">
+            <div class="sidebar-label">Platforms</div>
+            <div class="sidebar-value">{project.platforms.join(', ')}</div>
+          </div>
+          <div class="sidebar-block">
+            <div class="sidebar-label">Services</div>
+            <div class="sidebar-tags">
+              {project.services.map(s => <span class="sidebar-tag">{s.replace(/-/g,' ')}</span>)}
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+      <div class="project-back">
+        <a href={`${base}/portfolio/`}>← Back to Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .project-hero { position: relative; aspect-ratio: 21/9; overflow: hidden; }
+  .project-hero img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+  .project-hero-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 60px 0;
+    background: linear-gradient(transparent, rgba(12,11,8,0.85));
+  }
+  .project-hero-title { font-size: clamp(32px, 5vw, 64px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .project-hero-meta { font-size: 13px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+  .project-content { padding: 80px 0; }
+  .project-layout { display: grid; grid-template-columns: 1fr 280px; gap: 80px; margin-bottom: 64px; }
+  .project-body h2 { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+  .project-body p { font-size: 16px; line-height: 1.75; color: var(--text-muted); }
+
+  .sidebar-block { margin-bottom: 28px; }
+  .sidebar-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .sidebar-value { font-size: 15px; color: var(--text); }
+  .sidebar-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sidebar-tag {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid #2a2318;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .project-back a {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .project-back a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .project-layout { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>

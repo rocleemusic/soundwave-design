@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+import services from '../data/services.json';
+
+const base = import.meta.env.BASE_URL;
+const navLinks = [
+  { label: 'Home',      href: `${base}/`          },
+  { label: 'About',     href: `${base}/about/`     },
+  { label: 'Services',  href: `${base}/services/`  },
+  { label: 'Portfolio', href: `${base}/portfolio/` },
+  { label: 'Contact',   href: `${base}/contact/`   },
+];
+---
+<Base title="404" description="Page not found.">
+
+  <!-- MAIN BODY -->
+  <section class="not-found">
+    <div class="container">
+      <div class="not-found-number">404</div>
+      <h1 class="not-found-heading">Page not found.</h1>
+      <p class="not-found-sub">Maybe you were looking for:</p>
+      <nav class="not-found-links">
+        {navLinks.map(l => <a href={l.href}>{l.label}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  <!-- SERVICES STRIP -->
+  <section class="services-section">
+    <div class="container">
+      <div class="services-layout">
+
+        <div class="services-right">
+          <div class="display-state display-default">
+            <div class="display-name">For games, trailers,<br />and interactive <em>media.</em></div>
+          </div>
+          {services.map((s, i) => (
+            <div class={`display-state display-s${i + 1}`}>
+              <div class="display-desc">{s.descriptor}</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="services-left">
+          <div class="services-rows">
+            {services.map(s => (
+              <a class="service-row" href={`${base}/services/#${s.slug}`}>
+                <span class="row-name">{s.title}</span>
+                <span class="row-arrow">→</span>
+              </a>
+            ))}
+          </div>
+          <a class="services-cta" href={`${base}/services/`}>See all services</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>Ready to build something?</h2>
+      <p>Tell us about your project and we'll find the right fit.</p>
+      <a class="btn-primary" href={`${base}/contact/`}>Get in Touch</a>
+    </div>
+  </div>
+
+</Base>
+
+<style>
+  .not-found {
+    padding: 120px 0 80px;
+    text-align: center;
+    border-bottom: 1px solid #2a2318;
+  }
+  .not-found-number {
+    font-size: clamp(80px, 15vw, 160px);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .not-found-heading { font-size: clamp(20px, 3vw, 32px); font-weight: 700; margin-bottom: 16px; }
+  .not-found-sub { font-size: 14px; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 32px; }
+  .not-found-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .not-found-links a {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .not-found-links a:hover { color: var(--accent); }
+
+  /* Services strip — same as home */
+  .services-section { padding: 88px 0; border-bottom: 1px solid #2a2318; }
+  .services-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0 80px; align-items: center; }
+  .services-rows { border-top: 1px solid #2a2318; margin-bottom: 40px; }
+  .service-row {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    align-items: center;
+    padding: 30px 0;
+    border-bottom: 1px solid #2a2318;
+    text-decoration: none;
+  }
+  .row-name { font-size: clamp(20px, 2.2vw, 30px); font-weight: 700; letter-spacing: -0.02em; color: var(--text); transition: color 0.25s; }
+  .row-arrow { font-size: 16px; color: var(--accent-deep); text-align: right; transition: color 0.25s, transform 0.25s; }
+  .service-row:hover .row-name { color: var(--accent); }
+  .service-row:hover .row-arrow { color: var(--accent); transform: translateX(6px); }
+
+  .services-right { position: relative; min-height: 300px; display: flex; align-items: center; justify-content: center; }
+  .display-state { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); opacity: 0; pointer-events: none; transition: opacity 0.7s ease; }
+  .display-default { opacity: 1; }
+  .display-name { font-size: clamp(28px, 3.5vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; color: var(--text); }
+  .display-name em { font-style: normal; color: var(--accent); }
+  .display-desc { font-size: clamp(28px, 3.5vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--text); max-width: 480px; }
+
+  .services-layout:has(.service-row:nth-child(1):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(1):hover) .display-s1 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(2):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(2):hover) .display-s2 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(3):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(3):hover) .display-s3 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(4):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(4):hover) .display-s4 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(5):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(5):hover) .display-s5 { opacity: 1; }
+
+  .services-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none; transition: color 0.15s;
+  }
+  .services-cta:hover { color: var(--text); }
+  .services-cta::after { content: "→"; color: var(--accent); margin-left: 4px; }
+
+  @media (max-width: 768px) {
+    .services-layout { grid-template-columns: 1fr; }
+    .services-right { display: none; }
+  }
+</style>

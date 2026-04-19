@@ -1,0 +1,423 @@
+---
+import Base from '../layouts/Base.astro';
+import services from '../data/services.json';
+import clients from '../data/clients.json';
+import portfolio from '../data/portfolio.json';
+import testimonials from '../data/testimonials.json';
+
+const base = import.meta.env.BASE_URL;
+const featured = portfolio.filter(p => p.featured);
+---
+<Base title="Home" description="Audio Partners. Not Vendors. Award-winning game audio studio specializing in sound design, technical audio, and original music.">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Game Audio Studio</div>
+        <h1 class="hero-title">Audio Partners.<br /><em>Not Vendors.</em></h1>
+        <div class="hero-actions">
+          <a class="btn-primary" href={`${base}/portfolio/`}>View Our Work</a>
+          <a class="btn-ghost" href={`${base}/contact/`}>Get in Touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- SERVICES STRIP -->
+  <section class="services-section">
+    <div class="container">
+      <div class="services-layout">
+
+        <!-- Left: display panel -->
+        <div class="services-right">
+          <div class="display-state display-default">
+            <div class="display-name">For games, trailers,<br />and interactive <em>media.</em></div>
+          </div>
+          {services.map((s, i) => (
+            <div class={`display-state display-s${i + 1}`}>
+              <div class="display-desc">{s.descriptor}</div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Right: rows -->
+        <div class="services-left">
+          <div class="services-rows">
+            {services.map(s => (
+              <a class="service-row" href={`${base}/services/#${s.slug}`}>
+                <span class="row-name">{s.title}</span>
+                <span class="row-arrow">→</span>
+              </a>
+            ))}
+          </div>
+          <a class="services-cta" href={`${base}/services/`}>See all services</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Selected Work</div>
+          <h2 class="section-title">Featured Projects</h2>
+        </div>
+        <a class="section-link" href={`${base}/portfolio/`}>View all work</a>
+      </div>
+      <div class="portfolio-grid">
+        {featured.map(p => (
+          <a class="project-card" href={`${base}/portfolio/${p.slug}/`}>
+            <img src={`${base}/images/portfolio/${p.cover}`} alt={p.title} width="1280" height="720" />
+            <div class="project-info">
+              <div class="project-title">{p.title}</div>
+              <div class="project-tags">
+                {p.services.map(s => <span class="project-tag">{s.replace('-', ' ')}</span>)}
+                {p.platforms.slice(0,1).map(pl => <span class="project-tag">{pl}</span>)}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT LOGOS -->
+  <section class="logos-section">
+    <div class="container">
+      <div class="logos-label">Trusted by</div>
+      <div class="logos-grid">
+        {clients.map(c => (
+          <div class={`logo-item${c.forceWhite ? ' force-white' : ''}`}>
+            <img src={`${base}/images/clients/${c.file}`} alt={c.name} height="28" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div>
+        <div class="section-label">What Clients Say</div>
+        <h2 class="section-title">Built on trust.</h2>
+      </div>
+      <div class="testimonials-grid">
+        {testimonials.map(t => (
+          <div class="testimonial fade-up">
+            <p class="testimonial-quote">{t.quote}</p>
+            <div class="testimonial-attr">
+              <strong>{t.name}</strong>
+              {t.title} · {t.company}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-eyebrow">Let's Work Together</div>
+      <h2 class="cta-title">Ready to build<br />something?</h2>
+      <p class="cta-sub">Tell us about your project.</p>
+      <a class="btn-primary" href={`${base}/contact/`}>Get in Touch</a>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 80px;
+    position: relative;
+    border-bottom: 1px solid #2a2318;
+    overflow: hidden;
+    background-image: url('/soundwave-design/images/portfolio/OW2-Key-art-1280x720-c-default.png');
+    background-size: cover;
+    background-position: center 30%;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(12,11,8,0.65) 0%, rgba(12,11,8,0.4) 40%, rgba(12,11,8,0.85) 100%),
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,165,90,0.04) 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 64px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-content { max-width: 900px; }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero-title {
+    font-size: clamp(52px, 9vw, 112px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin-bottom: 40px;
+  }
+  .hero-title em { font-style: normal; color: var(--accent); }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    right: 64px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: var(--accent-deep);
+  }
+
+  /* SERVICES STRIP */
+  .services-section {
+    padding: 88px 0;
+    border-bottom: 1px solid #2a2318;
+  }
+  .services-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 80px;
+    align-items: center;
+  }
+  .services-rows { border-top: 1px solid #2a2318; margin-bottom: 40px; }
+  .service-row {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    align-items: center;
+    padding: 30px 0;
+    border-bottom: 1px solid #2a2318;
+    text-decoration: none;
+  }
+  .row-name {
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    transition: color 0.25s;
+  }
+  .row-arrow {
+    font-size: 16px;
+    color: var(--accent-deep);
+    text-align: right;
+    transition: color 0.25s, transform 0.25s;
+  }
+  .service-row:hover .row-name { color: var(--accent); }
+  .service-row:hover .row-arrow { color: var(--accent); transform: translateX(6px); }
+
+  .services-right {
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .display-state {
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.7s ease;
+  }
+  .display-default { opacity: 1; }
+  .display-name {
+    font-size: clamp(28px, 3.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text);
+  }
+  .display-name em { font-style: normal; color: var(--accent); }
+  .display-desc {
+    font-size: clamp(28px, 3.5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text);
+    max-width: 480px;
+  }
+
+  .services-layout:has(.service-row:nth-child(1):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(1):hover) .display-s1 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(2):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(2):hover) .display-s2 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(3):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(3):hover) .display-s3 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(4):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(4):hover) .display-s4 { opacity: 1; }
+  .services-layout:has(.service-row:nth-child(5):hover) .display-default { opacity: 0; pointer-events: none; }
+  .services-layout:has(.service-row:nth-child(5):hover) .display-s5 { opacity: 1; }
+
+  .services-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .services-cta:hover { color: var(--text); }
+  .services-cta::after { content: "→"; color: var(--accent); margin-left: 4px; }
+
+  /* FEATURED WORK */
+  .featured-section { padding: 88px 0; border-bottom: 1px solid #2a2318; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+  .section-link {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .section-link:hover { color: var(--accent); }
+  .section-link::after { content: " →"; }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .project-card {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    display: block;
+    background: var(--surface);
+    text-decoration: none;
+  }
+  .project-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s, filter 0.4s;
+    filter: brightness(0.85);
+  }
+  .project-card:hover img { transform: scale(1.04); filter: brightness(1); }
+  .project-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(12,11,8,0.9));
+    transform: translateY(4px);
+    transition: transform 0.3s;
+  }
+  .project-card:hover .project-info { transform: translateY(0); }
+  .project-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .project-tag {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent-deep);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  /* CLIENT LOGOS */
+  .logos-section { padding: 72px 0; border-bottom: 1px solid #2a2318; }
+  .logos-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .logos-grid {
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    align-items: center;
+  }
+  .logo-item {
+    grid-column: span 5;
+    padding: 24px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.65;
+    transition: opacity 0.2s;
+  }
+  .logo-item:nth-child(n+7) { grid-column: span 6; }
+  .logo-item.force-white { filter: brightness(0) invert(1); }
+  .logo-item:hover { opacity: 1; }
+  .logo-item img { height: 28px; width: auto; max-width: 120px; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { padding: 88px 0; border-bottom: 1px solid #2a2318; }
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+  .testimonial { background: var(--surface); padding: 48px; }
+  .testimonial-quote {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .testimonial-quote::before { content: "\201C"; color: var(--accent); }
+  .testimonial-quote::after  { content: "\201D"; color: var(--accent); }
+  .testimonial-attr { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .testimonial-attr strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 13px; letter-spacing: 0.05em; }
+
+  /* CTA */
+  .cta-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .cta-title { font-size: clamp(32px, 5vw, 60px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 16px; }
+  .cta-sub { color: var(--text-muted); font-size: 16px; margin-bottom: 40px; }
+
+  @media (max-width: 768px) {
+    .services-layout { grid-template-columns: 1fr; }
+    .services-right { display: none; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .logos-grid { grid-template-columns: repeat(10, 1fr); }
+    .logo-item { grid-column: span 5 !important; }
+    .hero-inner { padding: 0 24px; }
+  }
+</style>
